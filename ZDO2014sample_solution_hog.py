@@ -7,6 +7,7 @@ import matplotlib.pyplot as plt
 import skimage
 import skimage.feature
 dir(skimage.feature)
+from skimage import filter
 #import skimage.feature.hog
 
 from skimage.feature import hog
