@@ -66,31 +66,31 @@ class Znacky:
         """
         Zde je kontruován vektor příznaků pro klasfikátor
         """
-        
+
         fd = np.array([])
 
         img = skimage.color.rgb2gray(im)
-      
+
         # graylevel
-         # HoG algorithm 
+         # HoG algorithm
         if self.hogFeatures:
             height, width = img.shape
             size = height*width
             pomer = height/width
-            
+
             if size>4100:
                 if pomer<0.6 or pomer<1.4:
                     # ctvercovy obrazek
-                    imr = skimage.transform.resize(img, [64, 64])                
+                    imr = skimage.transform.resize(img, [64, 64])
                     fd, hog_image = hog(imr, orientations=9, pixels_per_cell=(8,8),
                         cells_per_block=(3,3), visualise=True, normalise=False)
                     if demo:
                         plt.imshow(imr)
                         plt.suptitle('Zmenseni obrazu na velikost 64x64 pixelu.')
-                        plt.show() 
+                        plt.show()
                         plt.imshow(hog_image)
                         plt.suptitle('Analyza obrazu algoritmem HoG, rozdeleny na 8x8 bloku.')
-                        plt.show()  
+                        plt.show()
                 elif pomer<0.6:
                     # siroky obrazek
                     imr = skimage.transform.resize(img, [32, 64])
@@ -99,35 +99,35 @@ class Znacky:
                     if demo:
                         plt.imshow(imr)
                         plt.suptitle('Zmenseni obrazu na velikost 32x64 pixelu.')
-                        plt.show() 
+                        plt.show()
                         plt.imshow(hog_image)
                         plt.suptitle('Analyza obrazu algoritmem HoG, rozdeleny na 8x8 bloku.')
                         plt.show()
                 else:
-                     # vysoky obrazek 
+                     # vysoky obrazek
                     imr = skimage.transform.resize(img, [64, 32])
                     fd, hog_image = hog(imr, orientations=9, pixels_per_cell=(4,8),
                         cells_per_block=(3,3), visualise=True, normalise=False)
                     if demo:
                         plt.imshow(imr)
                         plt.suptitle('Zmenseni obrazu na velikost 64x32 pixelu.')
-                        plt.show() 
+                        plt.show()
                         plt.imshow(hog_image)
                         plt.suptitle('Analyza obrazu algoritmem HoG, rozdeleny na 8x8 bloku.')
                         plt.show()
             else:
                 if pomer<0.6 or pomer<1.4:
                     # ctvercovy obrazek
-                    imr = skimage.transform.resize(img, [32, 32])                
+                    imr = skimage.transform.resize(img, [32, 32])
                     fd, hog_image = hog(imr, orientations=9, pixels_per_cell=(4,4),
                         cells_per_block=(3,3), visualise=True, normalise=False)
                     if demo:
                         plt.imshow(imr)
                         plt.suptitle('Zmenseni obrazu na velikost 32x32 pixelu.')
-                        plt.show() 
+                        plt.show()
                         plt.imshow(hog_image)
                         plt.suptitle('Analyza obrazu algoritmem HoG, rozdeleny na 8x8 bloku.')
-                        plt.show()  
+                        plt.show()
                 elif pomer<0.6:
                     # siroky obrazek
                     imr = skimage.transform.resize(img, [16, 32])
@@ -136,23 +136,23 @@ class Znacky:
                     if demo:
                         plt.imshow(imr)
                         plt.suptitle('Zmenseni obrazu na velikost 16x32 pixelu.')
-                        plt.show() 
+                        plt.show()
                         plt.imshow(hog_image)
                         plt.suptitle('Analyza obrazu algoritmem HoG, rozdeleny na 8x8 bloku.')
                         plt.show()
                 else:
-                     # vysoky obrazek 
+                     # vysoky obrazek
                     imr = skimage.transform.resize(img, [32, 16])
                     fd, hog_image = hog(imr, orientations=9, pixels_per_cell=(2,4),
                         cells_per_block=(3,3), visualise=True, normalise=False)
                     if demo:
                         plt.imshow(imr)
                         plt.suptitle('Zmenseni obrazu na velikost 32x16 pixelu.')
-                        plt.show() 
+                        plt.show()
                         plt.imshow(hog_image)
                         plt.suptitle('Analyza obrazu algoritmem HoG, rozdeleny na 8x8 bloku.')
                         plt.show()
-                          
+
 
         if self.grayLevelFeatures:
 #            imr = skimage.transform.resize(img, [9, 9])
@@ -277,9 +277,9 @@ if __name__ == "__main__":
     logging.basicConfig(level=logging.DEBUG)
     zn = Znacky()
 # Natrenujeme na cele sade
-    zn.train(datadir='C:/Python27/Lib/site-packages/xy/ZDO2014sample_solution-master/zdo2014-training3/zdo2014-training3/')
+    zn.train(datadir='/home/mjirik/data/zdo2014/zdo2014-training3/')
 # Otestujeme na 1. sade
-    zn.kontrola('C:/Python27/Lib/site-packages/xy/ZDO2014sample_solution-master/zdo2014-training1/zdo2014-training1/')
+    zn.kontrola('/home/mjirik/data/zdo2014/zdo2014-training1/')
 
 
 # <codecell>
